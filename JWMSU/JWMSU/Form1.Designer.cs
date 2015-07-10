@@ -36,7 +36,8 @@
 			this.gameLocBrowseButton = new System.Windows.Forms.Button();
 			this.wadOutputBrowseButton = new System.Windows.Forms.Button();
 			this.wmsuButton = new System.Windows.Forms.Button();
-			this.wmsuProgressBar = new System.Windows.Forms.ProgressBar();
+			this.folderBrowserDialog = new System.Windows.Forms.FolderBrowserDialog();
+			this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -44,9 +45,9 @@
 			this.label1.AutoSize = true;
 			this.label1.Location = new System.Drawing.Point(13, 13);
 			this.label1.Name = "label1";
-			this.label1.Size = new System.Drawing.Size(126, 13);
+			this.label1.Size = new System.Drawing.Size(91, 13);
 			this.label1.TabIndex = 0;
-			this.label1.Text = "LSD Revamped location:";
+			this.label1.Text = "Textures location:";
 			// 
 			// gameLocField
 			// 
@@ -54,6 +55,7 @@
 			this.gameLocField.Name = "gameLocField";
 			this.gameLocField.Size = new System.Drawing.Size(267, 20);
 			this.gameLocField.TabIndex = 1;
+			this.gameLocField.TextChanged += new System.EventHandler(this.gameLocField_TextChanged);
 			// 
 			// label2
 			// 
@@ -70,6 +72,7 @@
 			this.wadOutputField.Name = "wadOutputField";
 			this.wadOutputField.Size = new System.Drawing.Size(267, 20);
 			this.wadOutputField.TabIndex = 3;
+			this.wadOutputField.TextChanged += new System.EventHandler(this.wadOutputField_TextChanged);
 			// 
 			// gameLocBrowseButton
 			// 
@@ -79,6 +82,7 @@
 			this.gameLocBrowseButton.TabIndex = 4;
 			this.gameLocBrowseButton.Text = "Browse";
 			this.gameLocBrowseButton.UseVisualStyleBackColor = true;
+			this.gameLocBrowseButton.Click += new System.EventHandler(this.gameLocBrowseButton_Click);
 			// 
 			// wadOutputBrowseButton
 			// 
@@ -88,6 +92,7 @@
 			this.wadOutputBrowseButton.TabIndex = 5;
 			this.wadOutputBrowseButton.Text = "Browse";
 			this.wadOutputBrowseButton.UseVisualStyleBackColor = true;
+			this.wadOutputBrowseButton.Click += new System.EventHandler(this.wadOutputBrowseButton_Click);
 			// 
 			// wmsuButton
 			// 
@@ -98,20 +103,23 @@
 			this.wmsuButton.TabIndex = 6;
 			this.wmsuButton.Text = "Just WAD my shit up™";
 			this.wmsuButton.UseVisualStyleBackColor = true;
+			this.wmsuButton.Click += new System.EventHandler(this.wmsuButton_Click);
 			// 
-			// wmsuProgressBar
+			// folderBrowserDialog
 			// 
-			this.wmsuProgressBar.Location = new System.Drawing.Point(16, 159);
-			this.wmsuProgressBar.Name = "wmsuProgressBar";
-			this.wmsuProgressBar.Size = new System.Drawing.Size(336, 14);
-			this.wmsuProgressBar.TabIndex = 7;
+			this.folderBrowserDialog.RootFolder = System.Environment.SpecialFolder.MyComputer;
+			// 
+			// saveFileDialog
+			// 
+			this.saveFileDialog.DefaultExt = "wad";
+			this.saveFileDialog.Filter = "WAD files|*.wad";
+			this.saveFileDialog.Title = "Choose WAD location";
 			// 
 			// MainForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(364, 185);
-			this.Controls.Add(this.wmsuProgressBar);
+			this.ClientSize = new System.Drawing.Size(364, 167);
 			this.Controls.Add(this.wmsuButton);
 			this.Controls.Add(this.wadOutputBrowseButton);
 			this.Controls.Add(this.gameLocBrowseButton);
@@ -139,7 +147,8 @@
 		private System.Windows.Forms.Button gameLocBrowseButton;
 		private System.Windows.Forms.Button wadOutputBrowseButton;
 		private System.Windows.Forms.Button wmsuButton;
-		private System.Windows.Forms.ProgressBar wmsuProgressBar;
+		private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog;
+		private System.Windows.Forms.SaveFileDialog saveFileDialog;
 	}
 }
 

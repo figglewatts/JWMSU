@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using FreeImageAPI;
+using System.ComponentModel;
 
 namespace JWMSU.WAD
 {
@@ -110,9 +111,11 @@ namespace JWMSU.WAD
 			return newName;
 		}
 
-		public static void CreateWad(string outputFilename, string[] images, string[] names,
+		public static bool CreateWad(string outputFilename, string[] images, string[] names,
 			bool reserverLastPalColor = false)
 		{
+			if (images.Length <= 0) { return false; }
+			
 			using (FileStream fs = new FileStream(outputFilename, FileMode.Create))
 			using (BinaryWriter bw = new BinaryWriter(fs))
 			{
@@ -122,8 +125,13 @@ namespace JWMSU.WAD
 				{
 					string image = images[i];
 
+					if (!File.Exists(image)) { return false; }
+
 					// quantize images
 					FreeImageBitmap originalImage = FreeImageBitmap.FromFile(image);
+					//originalImage.IsTransparent = true;
+
+					//originalImage.SwapColors(new RGBQUAD(Color.Transparent), new RGBQUAD(Color.Blue), true);
 
 					// if texture will be transparent, reserve last colour if enabled
 					bool reserveLastClr = (names[i].StartsWith("{") && reserverLastPalColor);
@@ -133,7 +141,6 @@ namespace JWMSU.WAD
 
 					if (reserveLastClr) originalImage.Palette[MaxPaletteColors - 1] = new RGBQUAD(Color.Blue);
 
-					originalImage.SwapColors(new RGBQUAD(Color.Transparent), new RGBQUAD(Color.Blue), true);
 					imgs.Add(originalImage);
 				}
 				uint[] offsets = new uint[images.Length];
@@ -234,6 +241,7 @@ namespace JWMSU.WAD
 				{
 					imgs[i].Dispose();
 				}
+				return true;
 			}
 		}
 	}
