@@ -28,15 +28,6 @@ namespace JWMSU.WAD
 		private const int QCharWidth = 16;
 		private const int QNumbOfGlyphs = 256;
 		private readonly static byte[] WadHeaderId = { 0x57, 0x41, 0x44, 0x33 }; //WAD3
-
-		private WADHeader header;
-		private BinaryReader binReader;
-		private FileStream fs;
-
-		private long palleteBlockPos = 0;
-		private long pixelsBlockPos = 0;
-		private long lastImageSize = 0;
-		private long lastImageWidth = 0;
 		
 		public struct WADHeader
 		{
@@ -89,18 +80,6 @@ namespace JWMSU.WAD
 			LumpsInfo = new List<WADLump>();
 		}
 
-		public void Close()
-		{
-			if (binReader != null)
-			{
-				binReader.Close();
-			}
-			if (fs != null)
-			{
-				fs.Close();
-			}
-		}
-
 		private static byte[] CreateTextureName(string text)
 		{
 			byte[] newName = new byte[MaxNameLength];
@@ -129,9 +108,6 @@ namespace JWMSU.WAD
 
 					// quantize images
 					FreeImageBitmap originalImage = FreeImageBitmap.FromFile(image);
-					//originalImage.IsTransparent = true;
-
-					//originalImage.SwapColors(new RGBQUAD(Color.Transparent), new RGBQUAD(Color.Blue), true);
 
 					// if texture will be transparent, reserve last colour if enabled
 					bool reserveLastClr = (names[i].StartsWith("{") && reserverLastPalColor);
