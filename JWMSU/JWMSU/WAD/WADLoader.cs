@@ -21,7 +21,7 @@ namespace JWMSU.WAD
 		public string Filename { get; private set; }
 
 		private const int MaxPaletteColors = 256;
-		private const int MaxNameLength = 32;
+		private const int MaxNameLength = 16;
 		private const int LumpSize = 32;
 		private const int MaxTextureWidth = 4096;
 		private const int MaxTextureHeight = 4096;
