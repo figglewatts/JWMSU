@@ -1,7 +1,7 @@
 # JWMSU
 A utility for creating wads out of textures, used in the LSD Revamped SDK
 
-Simply give it a directory full of PNG textures, and a wad file to output, and it'll just wad your shit up
+Simply give it a directory full of PNG textures, and a wad file to output, and it'll Just WAD your shit up™
 
 ![JWMSU Screenshot](http://i.imgur.com/L8RcrsK.png)
 
